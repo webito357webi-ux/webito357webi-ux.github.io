@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía Digital de Siembra — SEMILLAPAPEL</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Nunito & Quicksand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            verdeHoja: '#3B7A57',
+            verdeHojaDark: '#2c5d41',
+            verdeHojaLight: '#eaf3ee',
+            marronTierra: '#5C4033',
+            marronTierraLight: '#f3ece9',
+            cremaArtesanal: '#F5F2EB',
+            cremaOscuro: '#EAE4D7'
+          },
+          fontFamily: {
+            display: ['Quicksand', 'sans-serif'],
+            sans: ['Nunito', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Textura sutil de papel reciclado artesanal */
+    body {
+      background-color: #F5F2EB;
+      background-image: 
+        radial-gradient(rgba(92, 64, 51, 0.06) 1px, transparent 0),
+        radial-gradient(rgba(59, 122, 87, 0.05) 1px, transparent 0);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+      color: #5C4033;
+    }
+
+    /* Animaciones suaves */
+    @keyframes floatSprout {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-4px) rotate(2deg); }
+    }
+    .animate-sprout {
+      animation: floatSprout 3.5s ease-in-out infinite;
+    }
+
+    .step-card {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .step-card.completed {
+      background-color: #eaf3ee;
+      border-color: #3B7A57;
+    }
+    .step-card.completed .step-title {
+      text-decoration: line-through;
+      opacity: 0.75;
+    }
+
+    /* Custom checkbox */
+    .custom-checkbox {
+      appearance: none;
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 2px solid #3B7A57;
+      border-radius: 0.5rem;
+      display: grid;
+      place-content: center;
+      cursor: pointer;
+      background-color: #fff;
+      transition: all 0.2s ease;
+    }
+    .custom-checkbox::before {
+      content: "";
+      width: 0.85rem;
+      height: 0.85rem;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em #ffffff;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+    .custom-checkbox:checked {
+      background-color: #3B7A57;
+    }
+    .custom-checkbox:checked::before {
+      transform: scale(1);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-verdeHoja selection:text-white pb-12">
+
+  <!-- Barra Superior Institucional -->
+  <div class="bg-marronTierra text-cremaArtesanal text-xs py-2 px-4 text-center font-semibold tracking-wide">
+    <span>I.E.P. “Dante Alighieri” • Trujillo 2026</span>
+    <span class="mx-2 opacity-50">|</span>
+    <span class="inline-flex items-center gap-1 bg-verdeHoja/30 text-white px-2.5 py-0.5 rounded-full">
+      🌱 Proyecto Ecológico CT &amp; EPT
+    </span>
+  </div>
+
+  <!-- Contenedor Principal (Optimizado para móviles y escritorio) -->
+  <main class="max-w-2xl mx-auto px-4 sm:px-6 pt-6 space-y-8">
+
+    <!-- 1) ENCABEZADO Y LOGOTIPO SIMBÓLICO -->
+    <header class="bg-white/90 backdrop-blur-sm rounded-3xl p-6 sm:p-8 shadow-sm border border-cremaOscuro text-center relative overflow-hidden">
+      <!-- Decoración esquina -->
+      <div class="absolute -top-6 -right-6 w-24 h-24 bg-verdeHojaLight rounded-full opacity-70 pointer-events-none"></div>
+      <div class="absolute -bottom-8 -left-8 w-28 h-28 bg-marronTierraLight rounded-full opacity-60 pointer-events-none"></div>
+
+      <!-- Logotipo Oficial SVG (Tarjeta de papel con brote verde) -->
+      <div class="relative inline-flex flex-col items-center justify-center mb-3">
+        <div class="w-24 h-24 rounded-2xl bg-cremaArtesanal border-2 border-marronTierra/20 flex items-center justify-center shadow-inner">
+          <svg viewBox="0 0 100 100" class="w-16 h-16 animate-sprout" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Logotipo SEMILLAPAPEL">
+            <!-- Tarjeta de papel artesanal -->
+            <rect x="24" y="42" width="52" height="44" rx="7" fill="#F5F2EB" stroke="#5C4033" stroke-width="4"/>
+            <!-- Líneas de texto simbolizando ideas escritas -->
+            <line x1="34" y1="56" x2="66" y2="56" stroke="#5C4033" stroke-width="3" stroke-linecap="round" opacity="0.45"/>
+            <line x1="34" y1="66" x2="58" y2="66" stroke="#5C4033" stroke-width="3" stroke-linecap="round" opacity="0.45"/>
+            <!-- Semilla central -->
+            <ellipse cx="50" cy="42" rx="6" ry="4" fill="#5C4033"/>
+            <!-- Tallo del brote -->
+            <path d="M50 40C50 31 50 24 50 18" stroke="#3B7A57" stroke-width="4" stroke-linecap="round"/>
+            <!-- Hoja izquierda -->
+            <path d="M50 26C40 26 32 19 34 12C42 12 49 18 50 26Z" fill="#3B7A57" stroke="#2c5d41" stroke-width="2" stroke-linejoin="round"/>
+            <!-- Hoja derecha -->
+            <path d="M50 22C60 22 68 15 66 8C58 8 51 14 50 22Z" fill="#4e9a70" stroke="#2c5d41" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="inline-block bg-verdeHojaLight text-verdeHoja font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-2">
+        Guía Digital de Siembra
+      </div>
+
+      <h1 class="font-display font-bold text-3xl sm:text-4xl text-verdeHoja tracking-tight">
+        SEMILLAPAPEL
+      </h1>
+      <p class="font-display font-semibold text-base sm:text-lg text-marronTierra mt-1">
+        “Planta tus ideas, haz crecer el futuro”
+      </p>
+      <p class="text-sm text-marronTierra/80 mt-3 max-w-md mx-auto leading-relaxed">
+        ¡Gracias por darle una segunda vida a este papel! Sigue esta guía interactiva para convertir tu tarjeta, etiqueta o separador en una planta real.
+      </p>
+    </header>
+
+    <!-- 2) SELECTOR INTERACTIVO DE SEMILLA -->
+    <section class="bg-white/95 rounded-3xl p-6 shadow-sm border border-cremaOscuro" aria-labelledby="seed-selector-title">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h2 id="seed-selector-title" class="font-display font-bold text-xl text-marronTierra flex items-center gap-2">
+            <span>🌿</span> Elige tu semilla
+          </h2>
+          <p class="text-xs sm:text-sm text-marronTierra/75">Selecciona la especie de tu papel para ver sus cuidados específicos</p>
+        </div>
+      </div>
+
+      <!-- Botones de especies -->
+      <div class="mb-3">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+          <span class="text-xs font-extrabold uppercase tracking-wider text-marronTierra/70">Filtrar por tipo:</span>
+          <div class="inline-flex flex-wrap gap-1.5" role="group" aria-label="Filtrar semillas por categoría">
+            <button type="button" onclick="filterCategory('todas')" id="filter-todas" class="filter-btn text-xs font-bold px-3 py-1.5 rounded-full border border-verdeHoja bg-verdeHoja text-white transition cursor-pointer">
+              Todas
+            </button>
+            <button type="button" onclick="filterCategory('comestibles')" id="filter-comestibles" class="filter-btn text-xs font-bold px-3 py-1.5 rounded-full border border-cremaOscuro bg-cremaArtesanal text-marronTierra hover:border-verdeHoja/50 transition cursor-pointer">
+              Comestibles y Aromáticas
+            </button>
+            <button type="button" onclick="filterCategory('ornamentales')" id="filter-ornamentales" class="filter-btn text-xs font-bold px-3 py-1.5 rounded-full border border-cremaOscuro bg-cremaArtesanal text-marronTierra hover:border-verdeHoja/50 transition cursor-pointer">
+              Ornamentales
+            </button>
+          </div>
+        </div>
+
+        <div id="seed-buttons-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3 mb-5" role="tablist" aria-label="Especies de semillas disponibles">
+          <!-- Generado dinámicamente según la categoría seleccionada -->
+        </div>
+      </div>
+
+      <!-- Tarjeta de detalles dinámicos de la semilla -->
+      <div id="seed-details" class="bg-cremaArtesanal rounded-2xl p-4 sm:p-5 border border-cremaOscuro/80 transition-all">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 border-b border-marronTierra/10 pb-3 mb-3">
+          <div class="flex items-center gap-2 flex-wrap">
+            <h3 id="seed-name" class="font-display font-bold text-lg text-verdeHoja">Chía</h3>
+            <span id="seed-category-badge" class="text-[11px] font-bold bg-verdeHojaLight text-verdeHojaDark px-2.5 py-0.5 rounded-full">Comestibles y Aromáticas</span>
+          </div>
+          <span id="seed-scientific" class="text-xs italic text-marronTierra/75 font-semibold">Salvia hispanica</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+          <div class="bg-white/80 rounded-xl p-3">
+            <span class="text-xs font-bold uppercase text-marronTierra/60 block">⏱️ Ventana estimada de germinación</span>
+            <span id="seed-germination" class="font-bold text-marronTierra mt-0.5 block">4 a 6 días</span>
+          </div>
+          <div class="bg-white/80 rounded-xl p-3">
+            <span class="text-xs font-bold uppercase text-marronTierra/60 block">☀️ Luz / Sol ideal</span>
+            <span id="seed-light" class="font-bold text-marronTierra mt-0.5 block">Luz indirecta brillante al inicio; luego buena luz natural</span>
+          </div>
+          <div class="bg-white/80 rounded-xl p-3">
+            <span class="text-xs font-bold uppercase text-marronTierra/60 block">💧 Riego y profundidad</span>
+            <span id="seed-water" class="font-bold text-marronTierra mt-0.5 block">Riego diario con atomizador • ~0.5 cm de profundidad</span>
+          </div>
+          <div class="bg-white/80 rounded-xl p-3">
+            <span class="text-xs font-bold uppercase text-marronTierra/60 block">🪴 Uso en casa</span>
+            <span id="seed-use" class="font-bold text-marronTierra mt-0.5 block">Semillas comestibles y brotes caseros</span>
+          </div>
+        </div>
+
+        <p id="seed-tip" class="text-xs sm:text-sm text-marronTierra/90 mt-3 bg-verdeHojaLight/70 text-verdeHojaDark p-3 rounded-xl font-medium">
+          💡 <strong>Guía práctica de cultivo casero:</strong> La chía suele germinar rápido si el papel se mantiene húmedo de forma pareja. Es una orientación práctica de jardinería doméstica; los tiempos pueden variar según el clima y la frescura de la semilla.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3) PASO A PASO VISUAL E INTERACTIVO (5 PASOS) -->
+    <section class="bg-white/95 rounded-3xl p-6 shadow-sm border border-cremaOscuro" aria-labelledby="steps-title">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+        <h2 id="steps-title" class="font-display font-bold text-xl text-marronTierra flex items-center gap-2">
+          <span>🪴</span> Paso a paso para plantar
+        </h2>
+        <span id="steps-counter" class="text-xs font-bold bg-verdeHojaLight text-verdeHoja px-3 py-1 rounded-full">
+          0 de 5 completados
+        </span>
+      </div>
+      <p class="text-xs sm:text-sm text-marronTierra/75 mb-4">Marca cada casilla conforme avances en la siembra de tu papel:</p>
+
+      <!-- Barra de progreso de pasos -->
+      <div class="w-full bg-cremaArtesanal h-2.5 rounded-full overflow-hidden mb-5">
+        <div id="steps-progress-bar" class="bg-verdeHoja h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+      </div>
+
+      <div class="space-y-3" id="steps-list">
+        <!-- Paso 1 -->
+        <label class="step-card flex items-start gap-3.5 p-4 rounded-2xl border-2 border-cremaOscuro bg-cremaArtesanal/50 cursor-pointer select-none">
+          <input type="checkbox" class="custom-checkbox mt-0.5 shrink-0" onchange="updateStepsProgress()">
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-extrabold uppercase tracking-wider text-verdeHoja">Paso 1</span>
+              <span class="text-base">🏺</span>
+            </div>
+            <h3 class="step-title font-display font-bold text-base text-marronTierra">Prepara la maceta y el sustrato</h3>
+            <p class="text-xs sm:text-sm text-marronTierra/80 mt-1">Usa una maceta con buen drenaje y llénala con tierra preparada o compost suelto hasta 2 cm antes del borde.</p>
+          </div>
+        </label>
+
+        <!-- Paso 2 -->
+        <label class="step-card flex items-start gap-3.5 p-4 rounded-2xl border-2 border-cremaOscuro bg-cremaArtesanal/50 cursor-pointer select-none">
+          <input type="checkbox" class="custom-checkbox mt-0.5 shrink-0" onchange="updateStepsProgress()">
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-extrabold uppercase tracking-wider text-verdeHoja">Paso 2</span>
+              <span class="text-base">💦</span>
+            </div>
+            <h3 class="step-title font-display font-bold text-base text-marronTierra">Hidrata el papel plantable</h3>
+            <p class="text-xs sm:text-sm text-marronTierra/80 mt-1">Humedece tu tarjeta en agua limpia por unos minutos hasta ablandar la celulosa y despertar la latencia de las semillas.</p>
+          </div>
+        </label>
+
+        <!-- Paso 3 -->
+        <label class="step-card flex items-start gap-3.5 p-4 rounded-2xl border-2 border-cremaOscuro bg-cremaArtesanal/50 cursor-pointer select-none">
+          <input type="checkbox" class="custom-checkbox mt-0.5 shrink-0" onchange="updateStepsProgress()">
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-extrabold uppercase tracking-wider text-verdeHoja">Paso 3</span>
+              <span class="text-base">🌱</span>
+            </div>
+            <h3 class="step-title font-display font-bold text-base text-marronTierra">Cubre con 0.5 cm de tierra</h3>
+            <p class="text-xs sm:text-sm text-marronTierra/80 mt-1">Coloca el papel extendido sobre la tierra húmeda y tápalos con una capa muy fina de sustrato (máximo <strong>0.5 cm</strong>).</p>
+          </div>
+        </label>
+
+        <!-- Paso 4 -->
+        <label class="step-card flex items-start gap-3.5 p-4 rounded-2xl border-2 border-cremaOscuro bg-cremaArtesanal/50 cursor-pointer select-none">
+          <input type="checkbox" class="custom-checkbox mt-0.5 shrink-0" onchange="updateStepsProgress()">
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-extrabold uppercase tracking-wider text-verdeHoja">Paso 4</span>
+              <span class="text-base">🚿</span>
+            </div>
+            <h3 class="step-title font-display font-bold text-base text-marronTierra">Riega suavemente con atomizador</h3>
+            <p class="text-xs sm:text-sm text-marronTierra/80 mt-1">Mantén el papel siempre húmedo rociando agua todos los días en forma de bruma fina, evitando encharcar.</p>
+          </div>
+        </label>
+
+        <!-- Paso 5 -->
+        <label class="step-card flex items-start gap-3.5 p-4 rounded-2xl border-2 border-cremaOscuro bg-cremaArtesanal/50 cursor-pointer select-none">
+          <input type="checkbox" class="custom-checkbox mt-0.5 shrink-0" onchange="updateStepsProgress()">
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-extrabold uppercase tracking-wider text-verdeHoja">Paso 5</span>
+              <span class="text-base">🌤️</span>
+            </div>
+            <h3 class="step-title font-display font-bold text-base text-marronTierra">Ubica en un lugar con luz natural</h3>
+            <p class="text-xs sm:text-sm text-marronTierra/80 mt-1">Coloca tu maceta cerca de una ventana o patio iluminado con luz natural indirecta mientras nacen los brotes.</p>
+          </div>
+        </label>
+      </div>
+
+      <!-- Mensaje de celebración al completar los 5 pasos -->
+      <div id="steps-celebration" class="hidden mt-4 p-4 rounded-2xl bg-verdeHoja text-white text-center font-bold text-sm shadow-sm">
+        🎉 ¡Excelente trabajo! Ya plantaste tu SEMILLAPAPEL. Ahora registra tu fecha de siembra abajo para seguir su crecimiento.
+      </div>
+    </section>
+
+    <!-- 4) RASTREADOR / CRONOGRAMA INTERACTIVO DE CRECIMIENTO -->
+    <section class="bg-white/95 rounded-3xl p-6 shadow-sm border border-cremaOscuro" aria-labelledby="tracker-title">
+      <h2 id="tracker-title" class="font-display font-bold text-xl text-marronTierra flex items-center gap-2 mb-1">
+        <span>📅</span> Rastreador de Crecimiento
+      </h2>
+      <p class="text-xs sm:text-sm text-marronTierra/75 mb-4">
+        Registra el día en que sembraste tu papel para calcular las fechas estimadas de cada etapa biológica.
+      </p>
+
+      <!-- Control de fecha de siembra -->
+      <div class="bg-cremaArtesanal rounded-2xl p-4 border border-cremaOscuro mb-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex-1">
+            <label for="planting-date" class="block text-xs font-bold uppercase text-marronTierra/75 mb-1">
+              Fecha de siembra:
+            </label>
+            <input type="date" id="planting-date" class="w-full bg-white border-2 border-cremaOscuro focus:border-verdeHoja rounded-xl px-3 py-2 text-sm font-bold text-marronTierra outline-none">
+          </div>
+          <div class="flex gap-2 sm:pt-5">
+            <button type="button" onclick="setTodayAndCalculate()" class="flex-1 sm:flex-initial bg-verdeHoja hover:bg-verdeHojaDark text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition shadow-sm cursor-pointer">
+              🌱 Sembré hoy
+            </button>
+            <button type="button" onclick="calculateGrowth()" class="bg-marronTierra hover:bg-marronTierra/90 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition shadow-sm cursor-pointer">
+              Calcular
+            </button>
+          </div>
+        </div>
+
+        <!-- Estado actual calculado -->
+        <div id="tracker-status-box" class="hidden mt-4 pt-3 border-t border-marronTierra/15">
+          <div class="flex items-center justify-between text-xs font-bold mb-1.5">
+            <span id="days-elapsed-label" class="text-verdeHoja">Día 0 desde la siembra</span>
+            <span id="progress-percent-label" class="text-marronTierra">0% del ciclo inicial</span>
+          </div>
+          <div class="w-full bg-white h-3 rounded-full overflow-hidden border border-cremaOscuro">
+            <div id="growth-bar" class="bg-gradient-to-r from-marronTierra to-verdeHoja h-full rounded-full transition-all duration-500" style="width: 5%"></div>
+          </div>
+          <p id="current-stage-alert" class="text-xs font-semibold text-marronTierra mt-2"></p>
+        </div>
+      </div>
+
+      <!-- Línea de tiempo de las 4 etapas -->
+      <div class="relative pl-6 border-l-2 border-verdeHoja/30 space-y-5 ml-2">
+        <!-- Etapa 1 -->
+        <div id="stage-1" class="stage-item relative bg-cremaArtesanal/60 rounded-2xl p-4 border border-cremaOscuro transition-all">
+          <span class="stage-dot absolute -left-[33px] top-4 w-4 h-4 rounded-full bg-verdeHoja border-4 border-cremaArtesanal"></span>
+          <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+            <span class="text-xs font-extrabold uppercase text-verdeHoja">Días 1 – 4 • Imbibición</span>
+            <span id="date-stage-1" class="text-xs font-bold text-marronTierra/70 bg-white px-2.5 py-0.5 rounded-full">Pendiente</span>
+          </div>
+          <h3 class="font-display font-bold text-base text-marronTierra">Absorción de agua y activación</h3>
+          <p class="text-xs sm:text-sm text-marronTierra/80 mt-1">La fibra de celulosa retiene la humedad por capilaridad y despierta el embrión vegetal en dormancia.</p>
+        </div>
+
+        <!-- Etapa 2 -->
+        <div id="stage-2" class="stage-item relative bg-cremaArtesanal/60 rounded-2xl p-4 border border-cremaOscuro transition-all">
+          <span class="stage-dot absolute -left-[33px] top-4 w-4 h-4 rounded-full bg-verdeHoja border-4 border-cremaArtesanal"></span>
+          <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+            <span class="text-xs font-extrabold uppercase text-verdeHoja">Días 5 – 9 • Primeros brotes</span>
+            <span id="date-stage-2" class="text-xs font-bold text-marronTierra/70 bg-white px-2.5 py-0.5 rounded-full">Pendiente</span>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h3 class="font-display font-bold text-base text-marronTierra">Germinación visible</h3>
+            <span class="text-[11px] font-bold bg-verdeHoja text-white px-2 py-0.5 rounded-full">85% efectividad comprobada</span>
+          </div>
+          <p class="text-xs sm:text-sm text-marronTierra/80 mt-1">Asoman los primeros tallitos verdes hacia la superficie buscando la luz natural.</p>
+        </div>
+
+        <!-- Etapa 3 -->
+        <div id="stage-3" class="stage-item relative bg-cremaArtesanal/60 rounded-2xl p-4 border border-cremaOscuro transition-all">
+          <span class="stage-dot absolute -left-[33px] top-4 w-4 h-4 rounded-full bg-verdeHoja border-4 border-cremaArtesanal"></span>
+          <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+            <span class="text-xs font-extrabold uppercase text-verdeHoja">Días 10 – 14 • Biodegradación</span>
+            <span id="date-stage-3" class="text-xs font-bold text-marronTierra/70 bg-white px-2.5 py-0.5 rounded-full">Pendiente</span>
+          </div>
+          <h3 class="font-display font-bold text-base text-marronTierra">Compostaje natural de celulosa</h3>
+          <p class="text-xs sm:text-sm text-marronTierra/80 mt-1">El papel reciclado se descompone por completo en la tierra, convirtiéndose en abono orgánico para las raíces.</p>
+        </div>
+
+        <!-- Etapa 4 -->
+        <div id="stage-4" class="stage-item relative bg-cremaArtesanal/60 rounded-2xl p-4 border border-cremaOscuro transition-all">
+          <span class="stage-dot absolute -left-[33px] top-4 w-4 h-4 rounded-full bg-verdeHoja border-4 border-cremaArtesanal"></span>
+          <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+            <span class="text-xs font-extrabold uppercase text-verdeHoja">Semana 3+ • Trasplante</span>
+            <span id="date-stage-4" class="text-xs font-bold text-marronTierra/70 bg-white px-2.5 py-0.5 rounded-full">Pendiente</span>
+          </div>
+          <h3 class="font-display font-bold text-base text-marronTierra">Crecimiento y paso a jardín</h3>
+          <p class="text-xs sm:text-sm text-marronTierra/80 mt-1">Cuando la plántula alcance entre 5 y 8 cm con hojas firmes, trasládala a una maceta más amplia o al jardín.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5) CONSEJOS RÁPIDOS EN TARJETAS -->
+    <section aria-labelledby="tips-title">
+      <h2 id="tips-title" class="font-display font-bold text-xl text-marronTierra flex items-center gap-2 mb-3 px-1">
+        <span>💡</span> Consejos rápidos de cuidado
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="bg-white/95 rounded-2xl p-4 border border-cremaOscuro shadow-sm">
+          <div class="w-10 h-10 rounded-xl bg-verdeHojaLight text-verdeHoja flex items-center justify-center text-xl mb-2.5">
+            🌫️
+          </div>
+          <h3 class="font-display font-bold text-sm text-marronTierra">Usa atomizador</h3>
+          <p class="text-xs text-marronTierra/80 mt-1 leading-relaxed">
+            Evita regar con chorro directo para no desenterrar las semillas ni romper el papel húmedo.
+          </p>
+        </div>
+
+        <div class="bg-white/95 rounded-2xl p-4 border border-cremaOscuro shadow-sm">
+          <div class="w-10 h-10 rounded-xl bg-marronTierraLight text-marronTierra flex items-center justify-center text-xl mb-2.5">
+            ⛅
+          </div>
+          <h3 class="font-display font-bold text-sm text-marronTierra">Sin sol extremo</h3>
+          <p class="text-xs text-marronTierra/80 mt-1 leading-relaxed">
+            Durante los primeros 9 días evita el sol fuerte directo para que la celulosa no se seque.
+          </p>
+        </div>
+
+        <div class="bg-white/95 rounded-2xl p-4 border border-cremaOscuro shadow-sm">
+          <div class="w-10 h-10 rounded-xl bg-verdeHojaLight text-verdeHoja flex items-center justify-center text-xl mb-2.5">
+            ♻️
+          </div>
+          <h3 class="font-display font-bold text-sm text-marronTierra">Cero residuos</h3>
+          <p class="text-xs text-marronTierra/80 mt-1 leading-relaxed">
+            Nuestro papel es 100 % reciclado artesanal y libre de blanqueadores químicos tóxicos.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PIE DE PÁGINA CON CRÉDITOS OFICIALES -->
+    <footer class="bg-marronTierra text-cremaArtesanal rounded-3xl p-6 text-center shadow-md space-y-3">
+      <div class="inline-flex items-center gap-2 bg-white/10 px-3.5 py-1 rounded-full text-xs font-bold tracking-wide">
+        <span>🌱 SEMILLAPAPEL</span>
+        <span>•</span>
+        <span>Economía Circular</span>
+      </div>
+      <p class="text-xs sm:text-sm font-semibold text-white">
+        Proyecto Escolar Integrado de Ciencia y Tecnología (CT) y Educación para el Trabajo (EPT)
+      </p>
+      <div class="text-xs text-cremaArtesanal/85 space-y-1 pt-1 border-t border-white/15">
+        <p class="font-bold text-white">Autoras del proyecto:</p>
+        <p>Camila Arroyo Villarreal • Kristelle Herrera Vásquez • María José Martínez Gutierrez</p>
+        <p class="pt-1 font-semibold">5.º Grado “C” de Secundaria — I.E.P. “Dante Alighieri”</p>
+        <p class="opacity-75">Trujillo, La Libertad, Perú • 2026</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    // Base de datos ampliada de semillas para SEMILLAPAPEL (orientación práctica de jardinería doméstica)
+    const seedsData = {
+      chia: {
+        name: "Chía",
+        scientific: "Salvia hispanica",
+        category: "comestibles",
+        categoryLabel: "Comestibles y Aromáticas",
+        icon: "🌱",
+        germination: "4 a 6 días",
+        light: "Luz indirecta brillante al brotar; luego sol suave a moderado",
+        water: "Bruma diaria con atomizador • ~0.5 cm de profundidad",
+        use: "Brotes y semillas para cocina casera",
+        tip: "💡 <strong>Guía práctica de cultivo casero:</strong> Su capa externa retiene humedad fácilmente junto a la celulosa. Evita encharcar para que la semilla no se pudra antes de brotar."
+      },
+      tomate: {
+        name: "Tomate Cherry",
+        scientific: "Solanum lycopersicum",
+        category: "comestibles",
+        categoryLabel: "Comestibles y Aromáticas",
+        icon: "🍅",
+        germination: "6 a 9 días",
+        light: "Luz brillante al germinar; luego 4–6 h de sol directo",
+        water: "Riego suave diario sin encharcar • ~0.5 cm de profundidad",
+        use: "Hortaliza comestible en maceta profunda",
+        tip: "💡 <strong>Guía práctica de cultivo casero:</strong> Cuando el tallo supere unos 8–10 cm y tenga hojas verdaderas, pásalo a una maceta más profunda con buen drenaje."
+      },
+      manzanilla: {
+        name: "Manzanilla",
+        scientific: "Matricaria chamomilla",
+        category: "comestibles",
+        categoryLabel: "Comestibles y Aromáticas",
+        icon: "🌼",
+        germination: "7 a 10 días",
+        light: "Luz solar suave o semisombra luminosa",
+        water: "Humedad constante con atomizador • ~0.5 cm de profundidad",
+        use: "Infusión aromática y cultivo en maceta",
+        tip: "💡 <strong>Guía práctica de cultivo casero:</strong> Las semillas de manzanilla son pequeñas, por lo que conviene cubrir el papel apenas con ~0.5 cm de sustrato fino y suelto."
+      },
+      anis: {
+        name: "Anís",
+        scientific: "Pimpinella anisum",
+        category: "comestibles",
+        categoryLabel: "Comestibles y Aromáticas",
+        icon: "🌿",
+        germination: "7 a 14 días",
+        light: "Luz natural luminosa; luego sol directo moderado",
+        water: "Riego ligero con rociador • ~0.5 cm de profundidad",
+        use: "Aromática y culinaria tradicional",
+        tip: "💡 <strong>Guía práctica de cultivo casero:</strong> El anís puede tardar un poco más en asomar; mantén la superficie húmeda sin aplastar la tierra y evita mover la raíz al trasplantar."
+      },
+      albahaca: {
+        name: "Albahaca",
+        scientific: "Ocimum basilicum",
+        category: "comestibles",
+        categoryLabel: "Comestibles y Aromáticas",
+        icon: "🍃",
+        germination: "5 a 10 días",
+        light: "Buena luz natural; 3–5 h de sol suave diario",
+        water: "Riego regular en la base y bruma al inicio • ~0.5 cm",
+        use: "Hierba aromática para cocina y maceta",
+        tip: "💡 <strong>Guía práctica de cultivo casero:</strong> Agradece temperaturas templadas y humedad pareja; poda las puntas superiores cuando crezca para fomentar un follaje más frondoso."
+      },
+      oregano: {
+        name: "Orégano",
+        scientific: "Origanum vulgare",
+        category: "comestibles",
+        categoryLabel: "Comestibles y Aromáticas",
+        icon: "🌾",
+        germination: "7 a 14 días",
+        light: "Luz brillante y sol directo moderado al crecer",
+        water: "Humedad moderada sin exceso de agua • ~0.5 cm de profundidad",
+        use: "Aromática resistente para cocina y maceta",
+        tip: "💡 <strong>Guía práctica de cultivo casero:</strong> Una vez establecida, tolera mejor los periodos secos que otras hierbas, siempre que la maceta tenga buen drenaje."
+      },
+      cilantro: {
+        name: "Cilantro",
+        scientific: "Coriandrum sativum",
+        category: "comestibles",
+        categoryLabel: "Comestibles y Aromáticas",
+        icon: "🥬",
+        germination: "7 a 12 días",
+        light: "Luz natural luminosa con sol suave o semisombra",
+        water: "Riego ligero y constante • ~0.5 cm de profundidad",
+        use: "Hojas frescas para cocina cotidiana",
+        tip: "💡 <strong>Guía práctica de cultivo casero:</strong> Mantén el sustrato parejo durante los primeros días para favorecer una brotación uniforme sin encharcamientos."
+      },
+      lechuga: {
+        name: "Lechuga",
+        scientific: "Lactuca sativa",
+        category: "comestibles",
+        categoryLabel: "Comestibles y Aromáticas",
+        icon: "🥗",
+        germination: "5 a 10 días",
+        light: "Luz brillante o semisombra fresca (evitar calor extremo)",
+        water: "Riego suave y frecuente • ~0.5 cm de profundidad",
+        use: "Hortaliza de hoja para ensaladas caseras",
+        tip: "💡 <strong>Guía práctica de cultivo casero:</strong> Prefiere ambientes frescos y ventilados; un exceso de calor intenso puede acelerar su desarrollo o reducir la brotación."
+      },
+      girasol: {
+        name: "Girasol Ornamental",
+        scientific: "Helianthus annuus",
+        category: "ornamentales",
+        categoryLabel: "Ornamentales",
+        icon: "🌻",
+        germination: "5 a 9 días",
+        light: "Luz brillante al inicio; luego buen sol directo",
+        water: "Riego moderado y constante • ~0.5 cm de profundidad",
+        use: "Planta ornamental de flor llamativa",
+        tip: "💡 <strong>Guía práctica de cultivo casero:</strong> Al crecer rápido, conviene darle espacio suficiente en la maceta o pasarla a tierra suelta para sostener mejor su tallo."
+      },
+      calendula: {
+        name: "Caléndula (Marigold)",
+        scientific: "Calendula officinalis",
+        category: "ornamentales",
+        categoryLabel: "Ornamentales",
+        icon: "🏵️",
+        germination: "5 a 10 días",
+        light: "Luz natural luminosa y sol suave a moderado",
+        water: "Riego ligero sin encharcar • ~0.5 cm de profundidad",
+        use: "Flor ornamental resistente para maceta o jardín",
+        tip: "💡 <strong>Guía práctica de cultivo casero:</strong> Es una especie ornamental práctica para principiantes; retirar las flores marchitas ayuda a prolongar su aspecto vistoso."
+      }
+    };
+
+    let currentCategory = 'todas';
+    let selectedSeedKey = 'chia';
+
+    // Filtrar categoría y renderizar botones de semillas
+    function filterCategory(category) {
+      currentCategory = category;
+
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('bg-verdeHoja', 'text-white', 'border-verdeHoja');
+        btn.classList.add('bg-cremaArtesanal', 'text-marronTierra', 'border-cremaOscuro');
+      });
+
+      const activeFilter = document.getElementById(`filter-${category}`);
+      if (activeFilter) {
+        activeFilter.classList.remove('bg-cremaArtesanal', 'text-marronTierra', 'border-cremaOscuro');
+        activeFilter.classList.add('bg-verdeHoja', 'text-white', 'border-verdeHoja');
+      }
+
+      const matchingKeys = Object.keys(seedsData).filter(key => {
+        if (category === 'todas') return true;
+        return seedsData[key].category === category;
+      });
+
+      if (!matchingKeys.includes(selectedSeedKey) && matchingKeys.length > 0) {
+        selectedSeedKey = matchingKeys[0];
+      }
+
+      renderSeedButtons(matchingKeys);
+      selectSeed(selectedSeedKey, false);
+    }
+
+    function renderSeedButtons(keys) {
+      const grid = document.getElementById('seed-buttons-grid');
+      grid.innerHTML = '';
+
+      keys.forEach(key => {
+        const seed = seedsData[key];
+        const isSelected = key === selectedSeedKey;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.id = `btn-${key}`;
+        btn.setAttribute('role', 'tab');
+        btn.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+        btn.onclick = () => selectSeed(key, true);
+
+        btn.className = isSelected
+          ? 'seed-btn active flex items-center gap-2.5 p-3 rounded-2xl border-2 border-verdeHoja bg-verdeHoja text-white font-bold transition-all shadow-sm text-left cursor-pointer'
+          : 'seed-btn flex items-center gap-2.5 p-3 rounded-2xl border-2 border-cremaOscuro bg-cremaArtesanal text-marronTierra hover:border-verdeHoja/50 font-bold transition-all text-left cursor-pointer';
+
+        btn.innerHTML = `
+          <span class="text-xl shrink-0">${seed.icon}</span>
+          <span class="text-xs sm:text-sm leading-tight">${seed.name}</span>
+        `;
+        grid.appendChild(btn);
+      });
+    }
+
+    // Cambiar semilla seleccionada
+    function selectSeed(seedKey, animate = true) {
+      const data = seedsData[seedKey];
+      if (!data) return;
+      selectedSeedKey = seedKey;
+
+      document.querySelectorAll('.seed-btn').forEach(btn => {
+        const isCurrent = btn.id === `btn-${seedKey}`;
+        btn.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+        btn.classList.remove('active', 'bg-verdeHoja', 'text-white', 'border-verdeHoja', 'shadow-sm', 'bg-cremaArtesanal', 'text-marronTierra', 'border-cremaOscuro');
+        if (isCurrent) {
+          btn.classList.add('active', 'bg-verdeHoja', 'text-white', 'border-verdeHoja', 'shadow-sm');
+        } else {
+          btn.classList.add('bg-cremaArtesanal', 'text-marronTierra', 'border-cremaOscuro');
+        }
+      });
+
+      const applyDetails = () => {
+        document.getElementById('seed-name').textContent = data.name;
+        document.getElementById('seed-category-badge').textContent = data.categoryLabel;
+        document.getElementById('seed-scientific').textContent = data.scientific;
+        document.getElementById('seed-germination').textContent = data.germination;
+        document.getElementById('seed-light').textContent = data.light;
+        document.getElementById('seed-water').textContent = data.water;
+        document.getElementById('seed-use').textContent = data.use;
+        document.getElementById('seed-tip').innerHTML = data.tip;
+      };
+
+      const detailsBox = document.getElementById('seed-details');
+      if (animate) {
+        detailsBox.style.opacity = '0.6';
+        setTimeout(() => {
+          applyDetails();
+          detailsBox.style.opacity = '1';
+        }, 120);
+      } else {
+        applyDetails();
+      }
+    }
+
+    // Actualizar progreso de checkboxes del paso a paso
+    function updateStepsProgress() {
+      const checkboxes = document.querySelectorAll('#steps-list input[type="checkbox"]');
+      let checkedCount = 0;
+
+      checkboxes.forEach(cb => {
+        const card = cb.closest('.step-card');
+        if (cb.checked) {
+          checkedCount++;
+          card.classList.add('completed');
+        } else {
+          card.classList.remove('completed');
+        }
+      });
+
+      const total = checkboxes.length;
+      const percentage = Math.round((checkedCount / total) * 100);
+
+      document.getElementById('steps-counter').textContent = `${checkedCount} de ${total} completados`;
+      document.getElementById('steps-progress-bar').style.width = `${percentage}%`;
+
+      const celebration = document.getElementById('steps-celebration');
+      if (checkedCount === total) {
+        celebration.classList.remove('hidden');
+      } else {
+        celebration.classList.add('hidden');
+      }
+    }
+
+    // Formatear fecha corta en español (ej. "21 nov")
+    function formatShortDate(baseDate, daysToAdd) {
+      const d = new Date(baseDate.getTime());
+      d.setDate(d.getDate() + daysToAdd);
+      return d.toLocaleDateString('es-PE', { day: 'numeric', month: 'short' });
+    }
+
+    // Establecer fecha de hoy y calcular
+    function setTodayAndCalculate() {
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      document.getElementById('planting-date').value = `${yyyy}-${mm}-${dd}`;
+      calculateGrowth();
+    }
+
+    // Calcular fechas estimadas y etapa actual
+    function calculateGrowth() {
+      const dateInput = document.getElementById('planting-date').value;
+      if (!dateInput) return;
+
+      // Guardar en localStorage para que el usuario conserve su fecha al volver a escanear el QR
+      try {
+        localStorage.setItem('semillapapel_planting_date', dateInput);
+      } catch (e) {}
+
+      const parts = dateInput.split('-');
+      const startDate = new Date(parts[0], parts[1] - 1, parts[2]);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const diffTime = today - startDate;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+      // Actualizar etiquetas de fechas estimadas en cada etapa
+      document.getElementById('date-stage-1').textContent = `${formatShortDate(startDate, 1)} – ${formatShortDate(startDate, 4)}`;
+      document.getElementById('date-stage-2').textContent = `${formatShortDate(startDate, 5)} – ${formatShortDate(startDate, 9)}`;
+      document.getElementById('date-stage-3').textContent = `${formatShortDate(startDate, 10)} – ${formatShortDate(startDate, 14)}`;
+      document.getElementById('date-stage-4').textContent = `Desde ${formatShortDate(startDate, 21)}`;
+
+      // Mostrar caja de estado
+      const statusBox = document.getElementById('tracker-status-box');
+      statusBox.classList.remove('hidden');
+
+      // Resetear estilos activos de etapas
+      document.querySelectorAll('.stage-item').forEach(el => {
+        el.classList.remove('ring-2', 'ring-verdeHoja', 'bg-verdeHojaLight/50');
+      });
+
+      const daysLabel = document.getElementById('days-elapsed-label');
+      const percentLabel = document.getElementById('progress-percent-label');
+      const growthBar = document.getElementById('growth-bar');
+      const stageAlert = document.getElementById('current-stage-alert');
+
+      if (diffDays < 0) {
+        daysLabel.textContent = `Siembra programada en ${Math.abs(diffDays)} día(s)`;
+        percentLabel.textContent = `0%`;
+        growthBar.style.width = `4%`;
+        stageAlert.textContent = "⏳ ¡Todo listo! Tu papel está esperando la fecha programada para ser sembrado.";
+        return;
+      }
+
+      const clampedDays = Math.min(diffDays, 21);
+      const pct = Math.max(6, Math.round((clampedDays / 21) * 100));
+
+      daysLabel.textContent = diffDays === 0 ? "Hoy es el Día 0 (¡Recién sembrado!)" : `Día ${diffDays} desde la siembra`;
+      percentLabel.textContent = `${pct}% del ciclo inicial`;
+      growthBar.style.width = `${pct}%`;
+
+      let activeStageId = 'stage-1';
+      if (diffDays <= 4) {
+        activeStageId = 'stage-1';
+        stageAlert.textContent = "💧 Etapa actual: Imbibición. Mantén el papel húmedo con atomizador para despertar la semilla.";
+      } else if (diffDays <= 9) {
+        activeStageId = 'stage-2';
+        stageAlert.textContent = "🌱 Etapa actual: ¡Primeros brotes! Revisa la superficie: las plántulas están rompiendo hacia la luz.";
+      } else if (diffDays <= 14) {
+        activeStageId = 'stage-3';
+        stageAlert.textContent = "♻️ Etapa actual: Biodegradación. El papel reciclado se está integrando como abono natural.";
+      } else {
+        activeStageId = 'stage-4';
+        stageAlert.textContent = "🌿 Etapa actual: Crecimiento firme. ¡Tu planta ya está lista para trasplantarse a una maceta más grande!";
+      }
+
+      const activeStageEl = document.getElementById(activeStageId);
+      if (activeStageEl) {
+        activeStageEl.classList.add('ring-2', 'ring-verdeHoja', 'bg-verdeHojaLight/50');
+      }
+    }
+
+    // Cargar fecha guardada previamente si el usuario regresa desde el QR
+    window.addEventListener('DOMContentLoaded', () => {
+      filterCategory('todas');
+      try {
+        const savedDate = localStorage.getItem('semillapapel_planting_date');
+        if (savedDate) {
+          document.getElementById('planting-date').value = savedDate;
+          calculateGrowth();
+        }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>
